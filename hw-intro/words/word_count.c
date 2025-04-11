@@ -21,8 +21,18 @@ Mutators take a reference to a list as first arg.
 */
 
 #include "word_count.h"
+#include <stdio.h>
+#include <unistd.h>
 
 /* Basic utilities */
+
+// void to_lower_str(char* str) {
+//     while(*str)
+//     {
+//       *str = tolower(*str);
+//       str ++;
+//     }
+//   }
 
 char *new_string(char *str) {
   char *new_str = (char *) malloc(strlen(str) + 1);
@@ -47,12 +57,30 @@ ssize_t len_words(WordCount *wchead) {
      this function.
   */
     size_t len = 0;
+    WordCount *cur = wchead;
+    while(cur)
+    {
+      len += cur->count;
+      cur = cur->next;
+    }
     return len;
 }
 
 WordCount *find_word(WordCount *wchead, char *word) {
   /* Return count for word, if it exists */
+  //to_lower_str(word);
   WordCount *wc = NULL;
+  WordCount *cur = wchead;
+  while(cur)
+  {
+    if(strcmp(cur->word, word) == 0)
+    {
+      wc = cur;
+      break;
+    }
+    
+    cur = cur->next;
+  }
   return wc;
 }
 
@@ -61,7 +89,22 @@ int add_word(WordCount **wclist, char *word) {
      Otherwise insert with count 1.
      Returns 0 if no errors are encountered in the body of this function; 1 otherwise.
   */
- return 0;
+  WordCount *tem = NULL;
+  //to_lower_str(word);
+  tem = find_word(*wclist, word);
+  if(tem)
+  {
+    tem->count ++;
+  }
+  else
+  {
+    WordCount *new_word = (WordCount *)malloc(sizeof(WordCount));
+    new_word->word = word;
+    new_word->count = 1;
+    new_word->next = *wclist;
+    *wclist = new_word;
+  }
+  return 0;
 }
 
 void fprint_words(WordCount *wchead, FILE *ofile) {
