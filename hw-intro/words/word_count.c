@@ -23,6 +23,7 @@ Mutators take a reference to a list as first arg.
 #include "word_count.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 /* Basic utilities */
 
