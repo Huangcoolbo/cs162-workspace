@@ -44,7 +44,6 @@ WordCount *word_counts = NULL;
  * Returns the total amount of words found in infile.
  * Useful functions: fgetc(), isalpha().
  */
-<<<<<<< HEAD
 
 
 int num_words(FILE* infile) {
@@ -81,19 +80,12 @@ int num_words(FILE* infile) {
   {
     num_words ++;
   }
-=======
-int num_words(FILE* infile) {
-  int num_words = 0;
->>>>>>> 992252b50f040d3e025c093773e6c086151c0f2d
 
   return num_words;
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> 992252b50f040d3e025c093773e6c086151c0f2d
 /*
  * 3.1.2 Word Frequency Count
  *
